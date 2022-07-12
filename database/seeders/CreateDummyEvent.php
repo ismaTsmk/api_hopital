@@ -7,6 +7,7 @@ use Faker\Factory;
 use App\Models\User;
 use App\Models\Event;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CreateDummyEvent extends Seeder
@@ -26,12 +27,20 @@ class CreateDummyEvent extends Seeder
         ];
         $users  = User::all();
         foreach ($users as $user) {
-            Event::create([
+            $event = Event::create([
                 'title' => $faker->name() ,
+                "salle"=> "salle n ° : ".rand(1,39),
+                "service"=> "service n ° : ".rand(1,39),
                 'start' =>  Carbon::now(),
                 'end' => Carbon::now()->addDay(rand(1,5)),
-                "data"=> json_encode($data),
-                "user_id"=>$user->id
+                "data"=> $faker->text(200),
+                // "user_id"=>$user->id
+            ]);
+
+            DB::table('associate_user_event')->Create([
+                "user_id"=>$user->id,
+                "event_id"=>$event->id,
+
             ]);
         }
 

@@ -35,8 +35,8 @@ class AuthController extends BaseController
 
     public function getMeEvent(Request $request)
     {
-       $user = $request->user()->event->all();
-       dd($user);
+       $user = $request->user()->event;
+    //    dd($user);
 
        return $this->handleResponse($user,"success retry");
     }
