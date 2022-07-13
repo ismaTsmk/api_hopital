@@ -33,11 +33,11 @@ class CreateDummyEvent extends Seeder
                 "service"=> "service n ° : ".rand(1,39),
                 'start' =>  Carbon::now(),
                 'end' => Carbon::now()->addDay(rand(1,5)),
-                "data"=> $faker->text(200),
+                "body"=> $faker->text(200),
                 // "user_id"=>$user->id
             ]);
 
-            DB::table('associate_user_event')->Create([
+            DB::table('associate_user_event')->insert([
                 "user_id"=>$user->id,
                 "event_id"=>$event->id,
 
