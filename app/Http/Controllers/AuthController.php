@@ -11,16 +11,19 @@ class AuthController extends BaseController
 {
     public function login(Request $request)
     {
+        logger('user tentaive connect ');
+
         if (!Auth::attempt($request->only('email', 'password'))) {
+            // dd($request->only('email', 'password'));
             return response()->json([
-                'message' => 'Invalid login details'
+                'message' => 'Invalid login details2'
             ], 401);
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
+        logger('user_be_connected');
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',

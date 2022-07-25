@@ -34,7 +34,7 @@ Route::post('/createevent',[FullCalendarController::class,"createEvent"]);
 Route::post('/deleteevent',[FullCalendarController::class,"deleteEvent"]);
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
 Route::post('/get_me_event', [AuthController::class, 'getMeEvent'])->middleware('auth:sanctum');
 
